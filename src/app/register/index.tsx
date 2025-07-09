@@ -5,10 +5,13 @@ import { Controller, useForm } from 'react-hook-form'
 import { registerFormSchema, registerFormSchemaValidation, type RegisterFormProps } from './scheme'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useUserService } from '../../service/UserService'
+import { useState } from 'react'
+import { TextFieldComponent } from '../../components/TextFieldComponent/index';
 
 export default function Register() {
   const navigate = useNavigate()
   const userService = useUserService()
+  const [loading, setLoading] = useState(false)
 
   const {
     control,
@@ -20,11 +23,14 @@ export default function Register() {
   })
 
   async function onSubmit(registerFormData: RegisterFormProps) {
+    setLoading(true)
     try {
       console.log(registerFormData)
       userService.newUser(registerFormData)
     } catch (error) {
       console.error(error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -63,23 +69,14 @@ export default function Register() {
             minWidth: 300
           }}
         >
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Controller
-              name='name'
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  id='name'
-                  label='Nome'
-                  size='small'
-                  variant='outlined'
-                  {...field}
-                  value={field.value}
-                />
-              )}
-            />
-            {errors.name && <Typography color='red' fontSize={12}>{errors.name?.message}</Typography>}
-          </Box>
+          <TextFieldComponent 
+            name='name'
+            label='Nome'
+            size='small'
+            variant='outlined'
+            errors={errors}
+            control={control}
+          />
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <Controller
               name='email'
@@ -114,8 +111,8 @@ export default function Register() {
             />
             {errors.password && <Typography color='red' fontSize={12}>{errors.password?.message}</Typography>}
             <Box sx={{ display: 'flex', flexDirection: 'column', mt: 2 }}>
-              <Button color='secondary' variant='contained' type='submit' >
-                Registrar
+              <Button color='secondary' variant='contained' type='submit' disabled={loading}>
+                {loading ? "..." : "Enviar"}
               </Button>
             </Box>
           </Box>

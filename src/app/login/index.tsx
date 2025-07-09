@@ -24,15 +24,15 @@ export default function Login() {
   })
 
   function onSubmit(userData: AuthFormProps) {
+    setloading(true)
     try {
       console.log(userData)
-      setloading(true)
-
       authService.login(userData, setUser)
-      setloading(false)
       navigate('/')
     } catch (error) {
       console.error(error)
+    } finally {
+      setloading(false)
     }
   }
 
@@ -105,7 +105,7 @@ export default function Login() {
             />
             {errors.password && <Typography color='red' fontSize={12}>{errors.password?.message}</Typography>}
             <Box sx={{ display: 'flex', flexDirection: 'column', mt: 2 }}>
-              <Button color='secondary' variant='contained' type='submit' >
+              <Button color='secondary' variant='contained' type='submit' disabled={loading}>
                 {loading == true ? 'Carregando...' : 'Entrar'}
               </Button>
             </Box>
