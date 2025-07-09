@@ -1,12 +1,13 @@
 import { Box, IconButton, InputAdornment, TextField, type TextFieldProps } from "@mui/material"
 import { Eye, EyeSlash } from "phosphor-react"
 import { useState } from "react"
-import { Controller, type Control, type FieldValues, type Path } from "react-hook-form"
+import { Controller, type Control, type FieldErrors, type FieldValues, type Path } from "react-hook-form"
 
 type PasswordComponentProps<T extends FieldValues> = {
   control: Control<T>;
   name: Path<T>;
   label: string;
+  errors: FieldErrors<T>;
 } & Omit<TextFieldProps, 'name' | 'label' | 'error' | 'helperText'>
 
 export function PasswordComponent <T extends FieldValues>({
@@ -28,7 +29,6 @@ export function PasswordComponent <T extends FieldValues>({
             {...field}
             id={name}
             label={label}
-            variant="outlined"
             type={showPassword ? 'text' : 'password'}
             error={!!error}
             helperText={error ? error.message : ''}

@@ -1,5 +1,5 @@
-import { Box, Button, Paper, TextField, Typography } from '@mui/material'
-import { Controller, useForm } from 'react-hook-form'
+import { Box, Button, Paper, Typography } from '@mui/material'
+import { useForm } from 'react-hook-form'
 import { type AuthFormProps, authFormSchema, authFormSchemaValidation } from './scheme'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PaperPlaneRight } from 'phosphor-react'
@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router'
 import { useAuthenticationService } from '../../service/AuthenticationService'
 import { useUserStore } from '../../context/userStore'
 import { useState } from 'react'
+import { TextFieldComponent } from '../../components/TextFieldComponent'
+import { PasswordComponent } from '../../components/PasswordComponent'
 
 export default function Login() {
   const [loading, setloading] = useState(false)
@@ -71,44 +73,26 @@ export default function Login() {
             minWidth: 300
           }}
         >
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Controller
-              name='email'
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  id='email'
-                  label='Email'
-                  size='small'
-                  variant='outlined'
-                  {...field}
-                  value={field.value}
-                />
-              )}
-            />
-            {errors.email && <Typography color='red' fontSize={12}>{errors.email?.message}</Typography>}
-          </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Controller
-              name='password'
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  id='password'
-                  label='Senha'
-                  size='small'
-                  variant='outlined'
-                  {...field}
-                  value={field.value}
-                />
-              )}
-            />
-            {errors.password && <Typography color='red' fontSize={12}>{errors.password?.message}</Typography>}
-            <Box sx={{ display: 'flex', flexDirection: 'column', mt: 2 }}>
-              <Button color='secondary' variant='contained' type='submit' disabled={loading}>
-                {loading == true ? 'Carregando...' : 'Entrar'}
-              </Button>
-            </Box>
+          <TextFieldComponent 
+            name='email'
+            label='Email'
+            control={control}
+            errors={errors}
+            size='small'
+            variant='outlined'
+          />
+          <PasswordComponent 
+            name='password'
+            label='Senha'
+            control={control}
+            errors={errors}
+            size='small'
+            variant='outlined'
+          />
+          <Box sx={{ display: 'flex', flexDirection: 'column', mt: 2 }}>
+            <Button color='secondary' variant='contained' type='submit' disabled={loading}>
+              {loading == true ? 'Carregando...' : 'Entrar'}
+            </Button>
           </Box>
         </Box>
         <Box
