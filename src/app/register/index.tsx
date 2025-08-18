@@ -1,13 +1,15 @@
-import { Box, Button, Paper, TextField, Typography } from '@mui/material'
+import { Box, Button, Paper, Typography } from '@mui/material'
 import { useNavigate } from 'react-router'
 import { Rewind } from 'phosphor-react'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { registerFormSchema, registerFormSchemaValidation, type RegisterFormProps } from './scheme'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useUserService } from '../../service/UserService'
-import { useUserStore } from '../../context/userStore'
-import { useAuthenticationService } from '../../service/AuthenticationService'
 import { useState } from 'react'
+import { TextFieldComponent } from '../../components/TextFieldComponent/index';
+import { PasswordComponent } from '../../components/PasswordComponent'
+import { useAuthenticationService } from '../../service/AuthenticationService'
+import { useUserStore } from '../../context/userStore'
 
 export default function Register() {
   const navigate = useNavigate()
@@ -26,6 +28,7 @@ export default function Register() {
   })
 
   async function onSubmit(registerFormData: RegisterFormProps) {
+    setLoading(true)
     try {
       console.log(registerFormData)
       const status = await userService.newUser(registerFormData)
@@ -42,6 +45,8 @@ export default function Register() {
       }
     } catch (error) {
       console.error(error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -80,61 +85,34 @@ export default function Register() {
             minWidth: 300
           }}
         >
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Controller
-              name='name'
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  id='name'
-                  label='Nome'
-                  size='small'
-                  variant='outlined'
-                  {...field}
-                  value={field.value}
-                />
-              )}
-            />
-            {errors.name && <Typography color='red' fontSize={12}>{errors.name?.message}</Typography>}
-          </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Controller
-              name='email'
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  id='email'
-                  label='Email'
-                  size='small'
-                  variant='outlined'
-                  {...field}
-                  value={field.value}
-                />
-              )}
-            />
-            {errors.email && <Typography color='red' fontSize={12}>{errors.email?.message}</Typography>}
-          </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Controller
-              name='password'
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  id='password'
-                  label='Senha'
-                  size='small'
-                  variant='outlined'
-                  {...field}
-                  value={field.value}
-                />
-              )}
-            />
-            {errors.password && <Typography color='red' fontSize={12}>{errors.password?.message}</Typography>}
-            <Box sx={{ display: 'flex', flexDirection: 'column', mt: 2 }}>
-              <Button color='secondary' variant='contained' type='submit' >
-                {loading ? "Carregando..." : "Registrar"}
-              </Button>
-            </Box>
+          <TextFieldComponent
+            name='name'
+            label='Nome'
+            control={control}
+            errors={errors}
+            size='small'
+            variant='outlined'
+          />
+          <TextFieldComponent
+            name='email'
+            label='Email'
+            control={control}
+            errors={errors}
+            size='small'
+            variant='outlined'
+          />
+          <PasswordComponent
+            name='password'
+            label='Senha'
+            control={control}
+            errors={errors}
+            size='small'
+            variant='outlined'
+          />
+          <Box sx={{ display: 'flex', flexDirection: 'column', mt: 2 }}>
+            <Button color='secondary' variant='contained' type='submit' disabled={loading}>
+              {loading ? "..." : "Enviar"}
+            </Button>
           </Box>
         </Box>
         <Box
