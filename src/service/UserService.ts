@@ -13,11 +13,14 @@ class UserService {
         return this.#instance
     }
 
-    async newUser(registerFormData: AuthUserProps) {
+    async newUser(registerFormData: AuthUserProps): Promise<number> {
         try {
-            await api.post('user', registerFormData)
+            const response = await api.post('user', registerFormData)
+            const status = response.status
+            return status
         } catch (error) {
             console.error(error)
+            return 0;
         }
     }
 }

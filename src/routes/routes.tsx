@@ -9,6 +9,7 @@ export function ApplicationRoutes() {
   return (
     <Routes>
       <Route element={<Template />}>
+        <Route path="*" element={<Home />} />
         <Route path="/" element={<Home />}/>
         <Route path="/category" element={<Category />}/>
       </Route>

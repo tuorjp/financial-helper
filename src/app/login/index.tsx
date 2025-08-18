@@ -23,12 +23,12 @@ export default function Login() {
     defaultValues: authFormSchema
   })
 
-  function onSubmit(userData: AuthFormProps) {
+  async function onSubmit(userData: AuthFormProps) {
     try {
       console.log(userData)
       setloading(true)
 
-      authService.login(userData, setUser)
+      await authService.login(userData, setUser)
       setloading(false)
       navigate('/')
     } catch (error) {

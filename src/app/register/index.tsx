@@ -5,10 +5,16 @@ import { Controller, useForm } from 'react-hook-form'
 import { registerFormSchema, registerFormSchemaValidation, type RegisterFormProps } from './scheme'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useUserService } from '../../service/UserService'
+import { useUserStore } from '../../context/userStore'
+import { useAuthenticationService } from '../../service/AuthenticationService'
+import { useState } from 'react'
 
 export default function Register() {
   const navigate = useNavigate()
   const userService = useUserService()
+  const authService = useAuthenticationService()
+  const { setUser } = useUserStore()
+  const [loading, setLoading] = useState(false)
 
   const {
     control,
@@ -22,7 +28,18 @@ export default function Register() {
   async function onSubmit(registerFormData: RegisterFormProps) {
     try {
       console.log(registerFormData)
-      userService.newUser(registerFormData)
+      const status = await userService.newUser(registerFormData)
+
+      if(status == 201) {
+        try {
+          setLoading(true)
+          await authService.login(registerFormData, setUser)
+          setLoading(false)
+          navigate('/')
+        } catch (error) {
+          console.error(error)
+        }
+      }
     } catch (error) {
       console.error(error)
     }
@@ -115,7 +132,7 @@ export default function Register() {
             {errors.password && <Typography color='red' fontSize={12}>{errors.password?.message}</Typography>}
             <Box sx={{ display: 'flex', flexDirection: 'column', mt: 2 }}>
               <Button color='secondary' variant='contained' type='submit' >
-                Registrar
+                {loading ? "Carregando..." : "Registrar"}
               </Button>
             </Box>
           </Box>
