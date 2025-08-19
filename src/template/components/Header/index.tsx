@@ -8,7 +8,7 @@ export default function Header() {
     <Box
       sx={{
         display: 'flex',
-        background: '#5b21b6',
+        background: '#9C27B0',
         width: '100%',
         height: 100,
         color: '#f1f5f9',
