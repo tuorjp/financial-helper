@@ -18,22 +18,18 @@ export function LinkComponent({ links }: LinkComponentProps) {
   return (
     <List>
       {
-        links.length > 0
-          ?
-          links.map((element, index) => (
-            <ListItem disablePadding key={index}>
-              <ListItemButton onClick={() => {
-                if (element.route) navigate(element.route)
-              }}>
-                <ListItemIcon>
-                  {element.icon}
-                </ListItemIcon>
-                <ListItemText primary={element.name} />
-              </ListItemButton>
-            </ListItem>
-          ))
-          :
-          <></>
+        links.map((element, index) => (
+          <ListItem disablePadding key={index}>
+            <ListItemButton onClick={() => {
+              if (element.route) navigate(element.route)
+            }}>
+              <ListItemIcon>
+                {element.icon}
+              </ListItemIcon>
+              <ListItemText primary={element.name} />
+            </ListItemButton>
+          </ListItem>
+        ))
       }
     </List>
   )
