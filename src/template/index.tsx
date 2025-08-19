@@ -1,32 +1,28 @@
 import { Box } from '@mui/material'
 import { Outlet } from 'react-router'
-import Header from './components/Header'
-import Footer from './components/Footer'
+import Sidebar from './components/Sidebar'
 
 export function Template() {
   return (
     <Box
       sx={{
         display: 'flex',
-        flexDirection: 'column',
         width: '100%',
         height: '100vh',
-        minHeight: '100vh',
-        alignItems: 'center',
       }}
     >
-      <Header />
+      <Sidebar />
       <Box
+        component={'main'}
         sx={{
-          px: 6,
-          py: 4,
-          width: '100%',
+          flex: 1,
           height: '100vh',
+          overflow: 'auto',
+          p: 4, //padding mais convencional (32px)
         }}
       >
         <Outlet />
       </Box>
-      <Footer />
     </Box>
   )
 }
