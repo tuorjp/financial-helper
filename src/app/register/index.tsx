@@ -10,6 +10,7 @@ import { TextFieldComponent } from '../../components/TextFieldComponent/index';
 import { PasswordComponent } from '../../components/PasswordComponent'
 import { useAuthenticationService } from '../../service/AuthenticationService'
 import { useUserStore } from '../../context/userStore'
+import { MainPanel } from '../../components/MainPanel'
 
 export default function Register() {
   const navigate = useNavigate()
@@ -33,7 +34,7 @@ export default function Register() {
       console.log(registerFormData)
       const status = await userService.newUser(registerFormData)
 
-      if(status == 201) {
+      if (status == 201) {
         try {
           setLoading(true)
           await authService.login(registerFormData, setUser)
@@ -51,17 +52,7 @@ export default function Register() {
   }
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100%',
-        height: '100vh',
-        minHeight: '100vh',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
+    <MainPanel>
       <Paper
         elevation={3}
         sx={{
@@ -132,6 +123,6 @@ export default function Register() {
           <Rewind color='#9C27B0' size={22} />
         </Box>
       </Paper>
-    </Box>
+    </MainPanel>
   )
 }
