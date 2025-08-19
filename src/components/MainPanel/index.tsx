@@ -31,20 +31,20 @@ export function MainPanel({ children }: MainPanelProps) {
         >
           <Box width={'100%'}>
             <CustomCard
+              title='Categorias'
+              text='Cadastre as categorias de gastos e ganhos 🔍💰'
+            />
+          </Box>
+          <Box width={'100%'}>
+            <CustomCard
               title='Entradas/Saídas'
-              text='Mantenha tudo registrado!! Registre as entradas e as saídas, separando por categorias e rastreando as datas de seus gastos 📝💲'
+              text='Mantenha tudo registrado!! Entradas, saídas e suas datas 📝💲'
             />
           </Box>
           <Box width={'100%'}>
             <CustomCard
               title='Relatórios'
               text='Visualize suas movimentações financeiras em forma de tabela ou gráfico, filtrando por período e categoria 📈📉'
-            />
-          </Box>
-          <Box width={'100%'}>
-            <CustomCard
-              title='Categorias'
-              text='Registre cada tipo de gasto e ganho!! Cadastre as categorias de gastos e ganhos 🔍💰'
             />
           </Box>
         </Box>

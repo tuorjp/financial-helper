@@ -4,6 +4,8 @@ import Register from "../app/register";
 import { Template } from "../template";
 import Home from "../app/home";
 import Category from "../app/category";
+import Payment from "../app/payment";
+import Receipt from "../app/receipt";
 
 export function ApplicationRoutes() {
   return (
@@ -12,6 +14,8 @@ export function ApplicationRoutes() {
         <Route path="*" element={<Home />} />
         <Route path="/" element={<Home />}/>
         <Route path="/category" element={<Category />}/>
+        <Route path="/payment" element={<Payment />}/>
+        <Route path="/receipt" element={<Receipt />}/>
       </Route>
     </Routes>
   )
