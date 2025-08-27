@@ -1,25 +1,19 @@
 import { create } from 'zustand'
-import { useEffect } from 'react'
-import { useAuthenticationService } from '../service/AuthenticationService'
+import nookies from 'nookies';
 
 type UserStore = {
   user: string | null;
   setUser: (user: string | null) => void;
 }
 
+const initialUser = nookies.get(null).USER || null;
+
 export const useUserStore = create<UserStore>((set) => ({
-  user: null,
+  user: initialUser,
   setUser: (user: string | null) => set({ user }),
+  logout: () => {
+    nookies.destroy(null, 'USER');
+    nookies.destroy(null, 'TK');
+    set({ user: null });
+  },
 }))
-
-export const useSyncUserWithAuth = () => {
-  const auth = useAuthenticationService()
-  const setUser = useUserStore((state) => state.setUser)
-
-  useEffect(() => {
-    const currentUser = auth.getUser()
-    if (currentUser) {
-      setUser(currentUser)
-    }
-  }, [auth, setUser])
-}

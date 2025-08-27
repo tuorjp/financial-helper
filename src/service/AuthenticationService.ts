@@ -1,5 +1,5 @@
 import nookies from 'nookies'
-import api from '.'
+import api from './api'
 import type { AuthUserProps, UserProps } from './@types'
 
 class Authentication {

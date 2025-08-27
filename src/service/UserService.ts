@@ -1,4 +1,4 @@
-import api from '.'
+import api from './api'
 import type { AuthUserProps } from './@types'
 
 class UserService {
