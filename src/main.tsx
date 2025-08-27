@@ -1,4 +1,3 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router'
 import RouterDecider from './routes'
@@ -9,10 +8,10 @@ import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  // <StrictMode>
     <BrowserRouter>
       <RouterDecider />
       <CssBaseline />
     </BrowserRouter>
-  </StrictMode>,
+  // </StrictMode>,
 )
