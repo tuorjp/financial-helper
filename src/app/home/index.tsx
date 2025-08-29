@@ -71,6 +71,7 @@ export default function Home() {
           value={filters.startDate}
           onChange={handleFilterChange}
           size="small"
+          InputLabelProps={{ shrink: true }}
         />
         <TextField
           label="Data de Fim"
@@ -79,6 +80,7 @@ export default function Home() {
           value={filters.endDate}
           onChange={handleFilterChange}
           size="small"
+          InputLabelProps={{ shrink: true }}
         />
         <Button variant="contained" onClick={handleApplyFilters}>
           Aplicar Filtros

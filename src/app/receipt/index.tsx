@@ -97,8 +97,35 @@ export default function Receipt() {
   return (
     <Box>
       <Box component={'form'} onSubmit={handleSubmit(onSubmit)} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <Controller name="receiptValue" control={control} render={({ field }) => <TextField {...field} label="Valor" type="number" error={!!errors.receiptValue} helperText={errors.receiptValue?.message} />} />
-        <Controller name="receiptDate" control={control} render={({ field }) => <TextField {...field} label="Data da Entrada" type="date" InputLabelProps={{ shrink: true }} error={!!errors.receiptDate} helperText={errors.receiptDate?.message} />} />
+        <Controller
+          name="receiptValue"
+          control={control}
+          render={
+            ({ field }) => (
+              <TextField
+                {...field}
+                label="Valor"
+                type="number"
+                error={!!errors.receiptValue} helperText={errors.receiptValue?.message}
+              />
+            )
+          }
+        />
+        <Controller
+          name="receiptDate"
+          control={control}
+          render={
+            ({ field }) => (
+              <TextField
+                {...field}
+                label="Data da Entrada"
+                type="date"
+                InputLabelProps={{ shrink: true }}
+                error={!!errors.receiptDate} helperText={errors.receiptDate?.message}
+              />
+            )
+          }
+        />
         <Controller
           name="category"
           control={control}

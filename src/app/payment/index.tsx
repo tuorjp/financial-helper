@@ -96,8 +96,36 @@ export default function Payment() {
   return (
     <Box>
       <Box component={'form'} onSubmit={handleSubmit(onSubmit)} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <Controller name="paymentValue" control={control} render={({ field }) => <TextField {...field} label="Valor" type="number" error={!!errors.paymentValue} helperText={errors.paymentValue?.message} />} />
-        <Controller name="paymentDate" control={control} render={({ field }) => <TextField {...field} label="Data da Entrada" type="date" error={!!errors.paymentDate} helperText={errors.paymentDate?.message} />} />
+        <Controller
+          name="paymentValue"
+          control={control}
+          render={
+            ({ field }) => (
+              <TextField
+                {...field}
+                label="Valor"
+                type="number"
+                error={!!errors.paymentValue} helperText={errors.paymentValue?.message}
+              />
+            )
+          }
+        />
+        <Controller
+          name="paymentDate"
+          control={control}
+          render={
+            ({ field }) => (
+              <TextField
+                {...field}
+                label="Data da Entrada"
+                type="date"
+                error={!!errors.paymentDate}
+                helperText={errors.paymentDate?.message}
+                InputLabelProps={{ shrink: true }}
+              />
+            )
+          }
+        />
         <Controller
           name="category"
           control={control}
