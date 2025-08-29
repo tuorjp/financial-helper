@@ -1,6 +1,8 @@
 import { Box } from '@mui/material'
 import { Outlet } from 'react-router'
+import BreadcrumbsComponent from '../components/Breadcrumbs'
 import Sidebar from './components/Sidebar'
+import ConfigBar from '../components/ConfigBar'
 
 export function Template() {
   return (
@@ -17,11 +19,14 @@ export function Template() {
         sx={{
           flex: 1,
           height: '100vh',
-          overflow: 'auto',
-          p: 4, //padding mais convencional (32px)
+          overflow: 'auto'
         }}
       >
-        <Outlet />
+        <ConfigBar />
+        <Box sx={{ padding: 4 }}>
+          <BreadcrumbsComponent />
+          <Outlet />
+        </Box>
       </Box>
     </Box>
   )
