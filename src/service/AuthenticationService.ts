@@ -1,6 +1,7 @@
 import nookies from 'nookies'
 import api from './api'
 import type { AuthUserProps, UserProps } from './@types'
+import type { NavigateFunction } from 'react-router'
 
 class Authentication {
   static #instance: Authentication
@@ -47,6 +48,14 @@ class Authentication {
     }
 
     return user
+  }
+
+  logout(setUser: (user: string | null) => void, navigate: NavigateFunction) {
+    console.log('ENTROU')
+    nookies.destroy(null, 'TK')
+    nookies.destroy(null, 'USER')
+    setUser(null)
+    navigate('/')
   }
 }
 

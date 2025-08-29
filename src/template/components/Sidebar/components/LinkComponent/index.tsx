@@ -5,7 +5,7 @@ export type LinkElement = {
   name: string
   route?: string
   icon?: React.ReactNode
-  function?: () => void
+  function?: (...args: unknown[]) => unknown | void
 }
 
 export type LinkComponentProps = {
@@ -19,10 +19,15 @@ export function LinkComponent({ links }: LinkComponentProps) {
     <List>
       {
         links.map((element, index) => (
-          <ListItem disablePadding key={index}>
-            <ListItemButton onClick={() => {
+          <ListItem
+            disablePadding
+            key={index}
+            onClick={() => {
               if (element.route) navigate(element.route)
-            }}>
+              if(element.function) element.function()
+            }}
+          >
+            <ListItemButton>
               <ListItemIcon>
                 {element.icon}
               </ListItemIcon>
