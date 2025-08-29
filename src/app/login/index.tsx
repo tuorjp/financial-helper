@@ -93,7 +93,8 @@ export default function Login() {
             display: 'flex',
             flexDirection: 'row',
             gap: 1,
-            cursor: 'pointer'
+            cursor: 'pointer',
+            mt: 2
           }}
           onClick={() => {
             navigate('/register')
