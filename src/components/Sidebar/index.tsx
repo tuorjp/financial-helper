@@ -1,8 +1,8 @@
 import { Box } from "@mui/material"
-import { LinkComponent, type LinkElement } from "./components/LinkComponent"
+import { LinkComponent, type LinkElement } from "./LinkComponent"
 import { Article, CreditCard, HouseLine, SignOut, Wallet } from "phosphor-react"
-import { useAuthenticationService } from "../../../service/AuthenticationService"
-import { useUserStore } from "../../../context/userStore"
+import { useAuthenticationService } from "../../service/AuthenticationService"
+import { useUserStore } from "../../context/userStore"
 import { useNavigate } from "react-router"
 
 export default function Sidebar() {
