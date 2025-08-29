@@ -31,7 +31,6 @@ export default function Register() {
   async function onSubmit(registerFormData: RegisterFormProps) {
     setLoading(true)
     try {
-      console.log(registerFormData)
       const status = await userService.newUser(registerFormData)
 
       if (status == 201) {

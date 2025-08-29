@@ -51,7 +51,6 @@ class Authentication {
   }
 
   logout(setUser: (user: string | null) => void, navigate: NavigateFunction) {
-    console.log('ENTROU')
     nookies.destroy(null, 'TK')
     nookies.destroy(null, 'USER')
     setUser(null)

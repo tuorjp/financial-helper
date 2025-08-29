@@ -28,9 +28,7 @@ export default function Login() {
 
   async function onSubmit(userData: AuthFormProps) {
     try {
-      console.log(userData)
       setloading(true)
-
       await authService.login(userData, setUser)
       setloading(false)
       navigate('/')
