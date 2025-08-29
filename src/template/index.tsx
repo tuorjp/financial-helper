@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { Outlet } from 'react-router'
 import BreadcrumbsComponent from '../components/Breadcrumbs'
 import Sidebar from './components/Sidebar'
-import ConfigBar from '../components/ConfigBar'
+import ConfigBar from './components/ConfigBar'
 
 export function Template() {
   return (

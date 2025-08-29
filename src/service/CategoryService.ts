@@ -15,7 +15,7 @@ class CategoryService {
 
   async create(data: Omit<SingleCategory, 'id'>): Promise<SingleCategory | null> {
     try {
-      const response = await api.post<SingleCategory>('/v1/category', data);
+      const response = await api.post<SingleCategory>('/category', data);
       return response.data;
     } catch (error) {
       console.error("Erro ao criar categoria:", error);
@@ -25,7 +25,7 @@ class CategoryService {
 
   async list(): Promise<ManyCategories> {
     try {
-      const response = await api.get<ManyCategories>('/v1/category');
+      const response = await api.get<ManyCategories>('/category');
       return response.data;
     } catch (error) {
       console.error("Erro ao listar categorias:", error);
@@ -35,7 +35,7 @@ class CategoryService {
 
   async listByType(type: number): Promise<ManyCategories> {
     try {
-      const response = await api.get<ManyCategories>(`/v1/category/${type}`);
+      const response = await api.get<ManyCategories>(`/category/${type}`);
       return response.data;
     } catch (error) {
       console.error(`Erro ao listar categorias por tipo ${type}:`, error);
@@ -44,9 +44,9 @@ class CategoryService {
   }
 
   async update(id: number, data: Partial<SingleCategory>): Promise<SingleCategory | null> {
-    // NOTA: Endpoint '/v1/category/{id}' (PUT) não existe ainda no backend.
+    // NOTA: Endpoint '/category/{id}' (PUT) não existe ainda no backend.
     try {
-      const response = await api.put<SingleCategory>(`/v1/category/${id}`, data);
+      const response = await api.put<SingleCategory>(`/category/${id}`, data);
       return response.data;
     } catch (error) {
       console.error(`Erro ao atualizar categoria ${id}:`, error);
@@ -55,9 +55,9 @@ class CategoryService {
   }
 
   async delete(id: number): Promise<boolean> {
-    // NOTA: Endpoint '/v1/category/{id}' (DELETE) não existe ainda no backend.
+    // NOTA: Endpoint '/category/{id}' (DELETE) não existe ainda no backend.
     try {
-      await api.delete(`/v1/category/${id}`);
+      await api.delete(`/category/${id}`);
       return true;
     } catch (error) {
       console.error(`Erro ao deletar categoria ${id}:`, error);

@@ -15,7 +15,7 @@ class PaymentService {
 
   async create(data: Omit<SinglePayment, 'id'>): Promise<SinglePayment | null> {
     try {
-      const response = await api.post<SinglePayment>('/v1/payment', data);
+      const response = await api.post<SinglePayment>('/payment', data);
       return response.data;
     } catch (error) {
       console.error("Erro ao criar saída:", error);
@@ -28,7 +28,7 @@ class PaymentService {
     try {
       const initDate = '1970-01-01';
       const endDate = '2999-12-31';
-      const response = await api.get<ManyPayments>(`/v1/payment-by-date?init-date=${initDate}&end-date=${endDate}`);
+      const response = await api.get<ManyPayments>(`/payment-by-date?init-date=${initDate}&end-date=${endDate}`);
       return response.data;
     } catch (error)
     {
@@ -40,9 +40,9 @@ class PaymentService {
   // --- Funções ainda não implementadas no backend ---
 
   async update(id: number, data: Partial<SinglePayment>): Promise<SinglePayment | null> {
-    // Endpoint '/v1/payment/{id}' (PUT) não existe ainda no backend.
+    // Endpoint '/payment/{id}' (PUT) não existe ainda no backend.
     try {
-      const response = await api.put<SinglePayment>(`/v1/payment/${id}`, data);
+      const response = await api.put<SinglePayment>(`/payment/${id}`, data);
       return response.data;
     } catch (error) {
       console.error(`Erro ao atualizar saída ${id}:`, error);
@@ -51,9 +51,9 @@ class PaymentService {
   }
 
   async delete(id: number): Promise<boolean> {
-    // Endpoint '/v1/payment/{id}' (DELETE) não existe ainda no backend.
+    // Endpoint '/payment/{id}' (DELETE) não existe ainda no backend.
     try {
-      await api.delete(`/v1/payment/${id}`);
+      await api.delete(`/payment/${id}`);
       return true;
     } catch (error) {
       console.error(`Erro ao deletar saída ${id}:`, error);

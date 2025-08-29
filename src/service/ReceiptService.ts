@@ -15,7 +15,7 @@ class ReceiptService {
 
   async create(data: Omit<SingleReceipt, 'id'>): Promise<SingleReceipt | null> {
     try {
-      const response = await api.post<SingleReceipt>('/v1/receipt', data);
+      const response = await api.post<SingleReceipt>('/receipt', data);
       return response.data;
     } catch (error) {
       console.error("Erro ao criar entrada:", error);
@@ -28,7 +28,7 @@ class ReceiptService {
     try {
       const initDate = '1970-01-01';
       const endDate = '2999-12-31';
-      const response = await api.get<ManyReceipts>(`/v1/receipt-by-date?init-date=${initDate}&end-date=${endDate}`);
+      const response = await api.get<ManyReceipts>(`/receipt-by-date?init-date=${initDate}&end-date=${endDate}`);
       return response.data;
     } catch (error) {
       console.error("Erro ao listar entradas:", error);
@@ -39,9 +39,9 @@ class ReceiptService {
   // --- Funções ainda não implementadas no backend ---
 
   async update(id: number, data: Partial<SingleReceipt>): Promise<SingleReceipt | null> {
-    // Endpoint '/v1/receipt/{id}' (PUT) não existe ainda no backend.
+    // Endpoint '/receipt/{id}' (PUT) não existe ainda no backend.
     try {
-      const response = await api.put<SingleReceipt>(`/v1/receipt/${id}`, data);
+      const response = await api.put<SingleReceipt>(`/receipt/${id}`, data);
       return response.data;
     } catch (error) {
       console.error(`Erro ao atualizar entrada ${id}:`, error);
@@ -50,9 +50,9 @@ class ReceiptService {
   }
 
   async delete(id: number): Promise<boolean> {
-    // NOTA: Endpoint '/v1/receipt/{id}' (DELETE) não existe ainda no backend.
+    // NOTA: Endpoint '/receipt/{id}' (DELETE) não existe ainda no backend.
     try {
-      await api.delete(`/v1/receipt/${id}`);
+      await api.delete(`/receipt/${id}`);
       return true;
     } catch (error) {
       console.error(`Erro ao deletar entrada ${id}:`, error);
